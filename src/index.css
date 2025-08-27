@@ -1,58 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Wanderly Travel Guide Design System */
 
 @layer base {
   :root {
+    /* Wanderly Color Palette */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 222 84% 5%;
+    
+    /* Primary - Teal */
+    --primary: 188 81% 41%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 188 95% 85%;
+    --primary-dark: 188 81% 31%;
+    
+    /* Accent - Amber */
+    --accent: 38 92% 50%;
+    --accent-foreground: 24 100% 15%;
+    --accent-light: 38 92% 85%;
+    --accent-dark: 38 92% 40%;
+    
+    /* Neutral Palette */
+    --slate-900: 222 84% 5%;
+    --slate-600: 215 16% 47%;
+    --slate-100: 210 40% 97%;
+    --slate-50: 210 40% 98%;
+    
+    /* Semantic Colors */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
+    --card-foreground: 222 84% 5%;
+    --muted: 210 40% 97%;
+    --muted-foreground: 215 16% 47%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 188 81% 41%;
+    
+    /* Design System Values */
     --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --radius-card: 1rem;
+    --radius-pill: 9999px;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-card-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    
+    /* Typography Scale */
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
+    --text-6xl: 3.75rem;
+    
+    /* Layout */
+    --container-max: 1100px;
+    --container-padding: 1rem;
+    
+    /* Animations */
+    --transition-fast: 150ms ease-in-out;
+    --transition-normal: 250ms ease-in-out;
+    --transition-slow: 350ms ease-in-out;
   }
 
   .dark {
@@ -101,5 +117,104 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', Georgia, serif;
+    font-weight: 700;
+  }
+}
+
+@layer components {
+  /* Container */
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-card border border-border rounded-2xl overflow-hidden;
+    box-shadow: var(--shadow-card);
+    transition: all var(--transition-normal);
+  }
+  
+  .card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  /* Chips/Tags */
+  .chip {
+    @apply inline-flex items-center px-3 py-1 text-xs font-medium rounded-full uppercase tracking-wide;
+  }
+  
+  .chip-primary {
+    @apply bg-primary-light text-primary-dark;
+  }
+  
+  .chip-accent {
+    @apply bg-accent-light text-accent-dark;
+  }
+  
+  .chip-muted {
+    @apply bg-muted text-muted-foreground;
+  }
+
+  /* Buttons - Travel Guide Style */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  
+  .btn-primary {
+    @apply btn bg-primary text-primary-foreground hover:bg-primary-dark focus:ring-primary;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-accent text-accent-foreground hover:bg-accent-dark focus:ring-accent;
+  }
+  
+  .btn-ghost {
+    @apply btn border-2 border-current text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary focus:ring-primary;
+  }
+
+  /* Skip Link for Accessibility */
+  .skip-link {
+    @apply absolute -top-full left-4 z-50 bg-primary text-primary-foreground px-4 py-2 rounded focus:top-4;
+  }
+
+  /* Hero Gradients */
+  .hero-gradient {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary)) 0%, 
+      hsl(var(--primary-dark)) 50%, 
+      hsl(var(--accent)) 100%);
+  }
+  
+  .hero-overlay {
+    background: linear-gradient(to bottom, 
+      rgba(0, 0, 0, 0.3) 0%, 
+      rgba(0, 0, 0, 0.6) 100%);
+  }
+
+  /* Image Overlays */
+  .image-overlay {
+    position: relative;
+  }
+  
+  .image-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+    pointer-events: none;
+  }
+  
+  .image-overlay > * {
+    position: relative;
+    z-index: 1;
   }
 }
